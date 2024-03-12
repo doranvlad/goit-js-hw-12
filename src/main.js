@@ -89,6 +89,7 @@ async function onBtnClick() {
 
     const photos = await pixabay.fetchPhoto(pixabay.searchParams)
     render.rendrePhoto(photos, photosList)
+    lightbox.refresh()
     scroll();
 }
 
