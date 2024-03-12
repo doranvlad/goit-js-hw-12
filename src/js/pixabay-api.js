@@ -1,26 +1,29 @@
+import axios from "axios";
+import iziToast from "izitoast";
+
+axios.defaults.baseURL = 'https://pixabay.com/api';
+
 export const searchParams  =  {
-    key: "11070675-9db3ad99120a3eae94c3d42ec",
-    q: "",
-    image_type: "photo",
-    orientation: "horizontal",
-    safesearch: "true",
-    pretty: "true",
+  key: "11070675-9db3ad99120a3eae94c3d42ec",
+  q: "",
+  image_type: "photo",
+  orientation: "horizontal",
+  safesearch: "true",
+  pretty: "true",
+  page: 1,
+  per_page: 15,
 }
 
-export function fetchPhoto(params) {
+export async function fetchPhoto(params) {
   const spinner = document.querySelector('.loader')
-  spinner.style.display = "block";
+  spinner.classList.remove('is-hidden')
   if (params.q === "") {
-        spinner.style.display = "none";
+        spinner.classList.add('is-hidden')
         return
-    }
-  return fetch(
-    `https://pixabay.com/api/?${new URLSearchParams(params)}`
-  ).then((response) => {
-    spinner.style.display = "none";
-    if (!response.ok) {
-      throw new Error(response.status);
-      }
-    return response.json();
-  });
+  }
+
+  const { data } = await axios.get(`?${new URLSearchParams(params)}`)
+  spinner.classList.add('is-hidden')
+  return data
 }
+
