@@ -15,7 +15,6 @@ const form = document.querySelector('.form')
 const loadMoreBtn = document.querySelector(".js-load-more-btn");
 
 
-
 input.addEventListener('input', inputValueFunc);
 form.addEventListener("submit", formSubmit);
 loadMoreBtn.addEventListener('click', onBtnClick);
@@ -86,7 +85,6 @@ async function onBtnClick() {
                 });
     }
     
-
     const photos = await pixabay.fetchPhoto(pixabay.searchParams)
     render.rendrePhoto(photos, photosList)
     lightbox.refresh()
